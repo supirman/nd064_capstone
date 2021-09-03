@@ -34,7 +34,7 @@ jobs:
             
   adservice:
     needs: paths
-    if: ${{needs.paths.outputs.adservice}}
+    if: needs.paths.outputs.adservice == 'true'
     runs-on: ubuntu-latest
     steps:
       -
@@ -62,7 +62,7 @@ jobs:
 
   adservice-v2:
     needs: paths
-    if: ${{needs.paths.outputs.adservice-v2}}
+    if: needs.paths.outputs.adservice-v2 == 'true'
     runs-on: ubuntu-latest
     steps:
       -
@@ -90,7 +90,7 @@ jobs:
 
   currencyservice:
     needs: paths
-    if: ${{needs.paths.outputs.currencyservice}}
+    if: needs.paths.outputs.currencyservice == 'true'
     runs-on: ubuntu-latest
     steps:
       -
@@ -118,7 +118,7 @@ jobs:
 
   frontend:
     needs: paths
-    if: ${{needs.paths.outputs.frontend}}
+    if: needs.paths.outputs.frontend == 'true'
     runs-on: ubuntu-latest
     steps:
       -
@@ -146,7 +146,7 @@ jobs:
 
   productcatalogservice:
     needs: paths
-    if: ${{needs.paths.outputs.productcatalogservice}}
+    if: needs.paths.outputs.productcatalogservice == 'true'
     runs-on: ubuntu-latest
     steps:
       -
