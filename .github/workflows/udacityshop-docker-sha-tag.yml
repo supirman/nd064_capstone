@@ -1,4 +1,4 @@
-name: Uda'CityShop [latest tag] - Package with Docker
+name: Uda'CityShop [sha tag] - Package with Docker
 
 on:
   push:
@@ -44,6 +44,14 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       -
+        name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/udacityshop-${{ matrix.service }}
+          tags: |
+            type=sha
+      -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       -
@@ -61,4 +69,5 @@ jobs:
         with:
           context: src/${{ matrix.service }}/
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/udacityshop-${{ matrix.service }}:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
