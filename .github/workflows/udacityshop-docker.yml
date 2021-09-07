@@ -59,4 +59,4 @@ jobs:
         with:
           context: src/${{ matrix.service }}/
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.service }}:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/udacityshop-${{ matrix.service }}:latest
