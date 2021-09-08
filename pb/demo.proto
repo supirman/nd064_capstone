@@ -16,6 +16,8 @@ syntax = "proto3";
 
 package hipstershop;
 
+option go_package = "hipstershop/";
+
 message Empty {}
 
 
@@ -112,4 +114,9 @@ message Ad {
 
     // short advertisement text to display.
     string text = 2;
+}
+
+// ------------AdServiceV2------------------
+service AdServiceV2 {
+    rpc GetAds(AdRequest) returns (AdResponse) {}
 }

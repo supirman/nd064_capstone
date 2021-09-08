@@ -819,14 +819,16 @@ var file_demo_proto_depIdxs = []int32{
 	0,  // 8: hipstershop.CurrencyService.GetSupportedCurrencies:input_type -> hipstershop.Empty
 	8,  // 9: hipstershop.CurrencyService.Convert:input_type -> hipstershop.CurrencyConversionRequest
 	9,  // 10: hipstershop.AdService.GetAds:input_type -> hipstershop.AdRequest
-	2,  // 11: hipstershop.ProductCatalogService.ListProducts:output_type -> hipstershop.ListProductsResponse
-	1,  // 12: hipstershop.ProductCatalogService.GetProduct:output_type -> hipstershop.Product
-	5,  // 13: hipstershop.ProductCatalogService.SearchProducts:output_type -> hipstershop.SearchProductsResponse
-	7,  // 14: hipstershop.CurrencyService.GetSupportedCurrencies:output_type -> hipstershop.GetSupportedCurrenciesResponse
-	6,  // 15: hipstershop.CurrencyService.Convert:output_type -> hipstershop.Money
-	10, // 16: hipstershop.AdService.GetAds:output_type -> hipstershop.AdResponse
-	11, // [11:17] is the sub-list for method output_type
-	5,  // [5:11] is the sub-list for method input_type
+	9,  // 11: hipstershop.AdServiceV2.GetAds:input_type -> hipstershop.AdRequest
+	2,  // 12: hipstershop.ProductCatalogService.ListProducts:output_type -> hipstershop.ListProductsResponse
+	1,  // 13: hipstershop.ProductCatalogService.GetProduct:output_type -> hipstershop.Product
+	5,  // 14: hipstershop.ProductCatalogService.SearchProducts:output_type -> hipstershop.SearchProductsResponse
+	7,  // 15: hipstershop.CurrencyService.GetSupportedCurrencies:output_type -> hipstershop.GetSupportedCurrenciesResponse
+	6,  // 16: hipstershop.CurrencyService.Convert:output_type -> hipstershop.Money
+	10, // 17: hipstershop.AdService.GetAds:output_type -> hipstershop.AdResponse
+	10, // 18: hipstershop.AdServiceV2.GetAds:output_type -> hipstershop.AdResponse
+	12, // [12:19] is the sub-list for method output_type
+	5,  // [5:12] is the sub-list for method input_type
 	5,  // [5:5] is the sub-list for extension type_name
 	5,  // [5:5] is the sub-list for extension extendee
 	0,  // [0:5] is the sub-list for field type_name
@@ -1329,6 +1331,92 @@ var _AdService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAds",
 			Handler:    _AdService_GetAds_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "demo.proto",
+}
+
+// AdServiceV2Client is the client API for AdServiceV2 service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type AdServiceV2Client interface {
+	GetAds(ctx context.Context, in *AdRequest, opts ...grpc.CallOption) (*AdResponse, error)
+}
+
+type adServiceV2Client struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewAdServiceV2Client(cc grpc.ClientConnInterface) AdServiceV2Client {
+	return &adServiceV2Client{cc}
+}
+
+func (c *adServiceV2Client) GetAds(ctx context.Context, in *AdRequest, opts ...grpc.CallOption) (*AdResponse, error) {
+	out := new(AdResponse)
+	err := c.cc.Invoke(ctx, "/hipstershop.AdServiceV2/GetAds", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// AdServiceV2Server is the server API for AdServiceV2 service.
+// All implementations must embed UnimplementedAdServiceV2Server
+// for forward compatibility
+type AdServiceV2Server interface {
+	GetAds(context.Context, *AdRequest) (*AdResponse, error)
+	mustEmbedUnimplementedAdServiceV2Server()
+}
+
+// UnimplementedAdServiceV2Server must be embedded to have forward compatible implementations.
+type UnimplementedAdServiceV2Server struct {
+}
+
+func (UnimplementedAdServiceV2Server) GetAds(context.Context, *AdRequest) (*AdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAds not implemented")
+}
+func (UnimplementedAdServiceV2Server) mustEmbedUnimplementedAdServiceV2Server() {}
+
+// UnsafeAdServiceV2Server may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AdServiceV2Server will
+// result in compilation errors.
+type UnsafeAdServiceV2Server interface {
+	mustEmbedUnimplementedAdServiceV2Server()
+}
+
+func RegisterAdServiceV2Server(s *grpc.Server, srv AdServiceV2Server) {
+	s.RegisterService(&AdServiceV2_ServiceDesc, srv)
+}
+
+func _AdServiceV2_GetAds_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdServiceV2Server).GetAds(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/hipstershop.AdServiceV2/GetAds",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdServiceV2Server).GetAds(ctx, req.(*AdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// AdServiceV2_ServiceDesc is the grpc.ServiceDesc for AdServiceV2 service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var AdServiceV2_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "hipstershop.AdServiceV2",
+	HandlerType: (*AdServiceV2Server)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetAds",
+			Handler:    _AdServiceV2_GetAds_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
