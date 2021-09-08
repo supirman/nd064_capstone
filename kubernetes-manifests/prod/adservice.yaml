@@ -16,7 +16,7 @@ spec:
       terminationGracePeriodSeconds: 5
       containers:
       - name: server
-        image: supirman/udacityshop-adservice-v2:sha-b9f5acc
+        image: supirman/udacityshop-adservice-v2:sha-5e24606
         ports:
         - containerPort: 9556
         env:

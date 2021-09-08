@@ -15,7 +15,7 @@ spec:
       serviceAccountName: default
       containers:
         - name: server
-          image: supirman/udacityshop-frontend:sha-b9f5acc
+          image: supirman/udacityshop-frontend:sha-5e24606
           ports:
           - containerPort: 8080
           readinessProbe:
