@@ -41,7 +41,7 @@ class AdServiceV2(demo_pb2_grpc.AdServiceV2Servicer, health_pb2_grpc.HealthServi
         
         response = stub.ListProducts(demo_pb2.Empty())
         # get 3 random result
-        random_products = random.choices(response, k=3)
+        random_products = random.choices(response.products, k=3)
         url= "/product/{}"
         text = "AdV2 - Items with 25% discount!"
         
