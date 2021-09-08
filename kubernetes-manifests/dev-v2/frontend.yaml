@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
-  namespace: prod
+  namespace: dev-v2
 spec:
   selector:
     matchLabels:
@@ -42,7 +42,7 @@ spec:
           - name: CURRENCY_SERVICE_ADDR
             value: "currencyservice:7000"
           - name: AD_SERVICE_ADDR
-            value: "adservice:9556"
+            value: "adservice-v2:9556"
           resources:
             requests:
               cpu: 100m
@@ -55,7 +55,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend
-  namespace: prod
+  namespace: dev-v2
 spec:
   type: ClusterIP
   selector:
