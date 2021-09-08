@@ -52,7 +52,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": null,
-  "iteration": 1630998142203,
+  "iteration": 1631112310290,
   "links": [],
   "panels": [
     {
@@ -130,7 +130,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(increase(container_cpu_usage_seconds_total{namespace=\"$namespace\", cluster=\"$cluster\"}[$__range])) by (pod)",
+          "expr": "sum(irate(container_cpu_usage_seconds_total{namespace=\"$namespace\", cluster=\"$cluster\"}[$__range])) by (pod)",
           "hide": false,
           "interval": "",
           "legendFormat": "{{pod}}",
@@ -204,7 +204,9 @@
       "id": 4,
       "options": {
         "legend": {
-          "calcs": [],
+          "calcs": [
+            "last"
+          ],
           "displayMode": "list",
           "placement": "bottom"
         },
@@ -233,8 +235,8 @@
       {
         "current": {
           "selected": false,
-          "text": "default",
-          "value": "default"
+          "text": "Prometheus",
+          "value": "Prometheus"
         },
         "description": null,
         "error": null,
@@ -300,12 +302,12 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Uda'CityShop Dashboard",
   "uid": "5HKgSmI7k",
-  "version": 11
+  "version": 13
 }
